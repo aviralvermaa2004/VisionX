@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --bg-deep:        #020818;
+  --bg-mid:         #050f2e;
+  --bg-panel:       rgba(6, 20, 60, 0.7);
+  --border-glow:    rgba(0, 200, 255, 0.25);
+  --border-bright:  rgba(0, 200, 255, 0.6);
+  --accent-cyan:    #00c8ff;
+  --accent-blue:    #0066ff;
+  --accent-teal:    #00ffd5;
+  --accent-purple:  #7c3aff;
+  --text-primary:   #e0f4ff;
+  --text-secondary: rgba(180, 220, 255, 0.6);
+  --text-mono:      'Share Tech Mono', monospace;
+  --font-display:   'Orbitron', sans-serif;
+  --font-body:      'Rajdhani', sans-serif;
+  --glow-cyan:      0 0 20px rgba(0, 200, 255, 0.4);
+  --glow-strong:    0 0 40px rgba(0, 200, 255, 0.25), 0 0 80px rgba(0, 100, 255, 0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 100, 255, 0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 90% 90%, rgba(0, 200, 255, 0.08) 0%, transparent 60%),
+    repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(0,150,255,0.03) 60px),
+    repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(0,150,255,0.03) 60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root { position: relative; z-index: 1; min-height: 100vh; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 2px; }
+
+/* Glassy Panel */
+.glass-panel {
+  background: var(--bg-panel);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glow);
+  border-radius: 16px;
+}
+
+/* Neon Text */
+.neon-text {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 10px rgba(0,200,255,0.8), 0 0 30px rgba(0,200,255,0.4);
+}
+
+/* Scanline overlay */
+.scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px, rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Pulse animation */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes borderPulse {
+  0%, 100% { border-color: rgba(0,200,255,0.25); }
+  50%       { border-color: rgba(0,200,255,0.7); }
+}
+
+.animate-in { animation: fadeSlideIn 0.5s ease forwards; }
